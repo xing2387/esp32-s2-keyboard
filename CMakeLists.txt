@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.16.0)
+set(TOP "$ENV{IDF_PATH}/components/tinyusb/tinyusb/")
+set(FAMILY "esp32s2")
+set(BOARD "espressif_saola_1")
+include($ENV{IDF_PATH}/components/tinyusb/tinyusb/hw/bsp/esp32s2/family.cmake)
+# include($ENV{IDF_PATH}/tools/cmake/project.cmake)
+project(Esp32S2Hid)
