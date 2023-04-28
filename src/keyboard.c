@@ -6,12 +6,12 @@ static int col_gpio_list[] = {
     GPIO_NUM_0,GPIO_NUM_1,GPIO_NUM_2,GPIO_NUM_3,
     GPIO_NUM_4,GPIO_NUM_5,GPIO_NUM_6,GPIO_NUM_7,
     GPIO_NUM_8,GPIO_NUM_9,GPIO_NUM_10,GPIO_NUM_11,
-    GPIO_NUM_12,GPIO_NUM_13,GPIO_NUM_14,GPIO_NUM_15
+    GPIO_NUM_12,GPIO_NUM_13,GPIO_NUM_14,GPIO_NUM_18
 };
 
 static int row_gpio_list[] = {
-    GPIO_NUM_18, GPIO_NUM_21, GPIO_NUM_26, GPIO_NUM_33,
-    GPIO_NUM_34, GPIO_NUM_35, GPIO_NUM_36, GPIO_NUM_37
+    GPIO_NUM_21, GPIO_NUM_26, GPIO_NUM_33, GPIO_NUM_34, 
+    GPIO_NUM_35, GPIO_NUM_36, GPIO_NUM_37, GPIO_NUM_38
 };
 
 static uint8_t keyboard_matrix[][KEYBOARD_ROW_NUM] = {
@@ -92,12 +92,12 @@ int keyboard_scan(uint8_t result[], char max_count) {
     uint8_t modify_bits = 0;    
     for (size_t col = 0; col < KEYBOARD_COL_NUM; col++) {
         gpio_set_level(col_gpio_list[col], 0);
-        ESP_LOGI("keyboard_scan", "gpio_set_level gpio_%d : %d", col_gpio_list[col], 0);
+        // ESP_LOGI("keyboard_scan", "gpio_set_level gpio_%d : %d", col_gpio_list[col], 0);
         for (size_t row = 0; row < KEYBOARD_ROW_NUM; row++) {
             int status = gpio_get_level(row_gpio_list[row]);
             if (status == 0) {
                 uint8_t keycode = keyboard_matrix[col][row];
-                ESP_LOGI("keyboard_scan", "col: %d, row: %d, keycode = %d\n", col, row, keycode);
+                // ESP_LOGI("keyboard_scan", "col: %d, row: %d, keycode = %d\n", col, row, keycode);
                 uint8_t modify_bit = get_modify_bit(keycode);
                 if (modify_bit != 0) {
                     modify_bits |= modify_bit;

@@ -32,10 +32,12 @@ int main(void) {
     // Create a task for tinyusb device stack
     (void)xTaskCreateStatic(usb_device_task, "usbd", USBD_STACK_SIZE, NULL, configMAX_PRIORITIES - 1, usb_device_stack, &usb_device_taskdef);
 
-    // Create HID task
-    // (void)xTaskCreateStatic(hid_task, "hid", HID_STACK_SZIE, NULL, configMAX_PRIORITIES - 2, hid_stack, &hid_taskdef);
+    //Create HID task
+    (void)xTaskCreateStatic(hid_task, "hid", HID_STACK_SZIE, NULL, configMAX_PRIORITIES - 2, hid_stack, &hid_taskdef);
 
-    hid_task(1);
+    void mouse_task(void *arg);
+    xTaskCreate(&mouse_task,  "mouse_task", 4096, NULL, configMAX_PRIORITIES, NULL);
+    // hid_task(1);
     return 0;
 }
 
@@ -59,19 +61,19 @@ void usb_device_task(void* param) {
 // Device callbacks
 //--------------------------------------------------------------------+
 
-// Invoked when device is mounted
-void tud_mount_cb(void) {}
+// // Invoked when device is mounted
+// void tud_mount_cb(void) {}
 
-// Invoked when device is unmounted
-void tud_umount_cb(void) {}
+// // Invoked when device is unmounted
+// void tud_umount_cb(void) {}
 
-// Invoked when usb bus is suspended
-// remote_wakeup_en : if host allow us  to perform remote wakeup
-// Within 7ms, device must draw an average of current less than 2.5 mA from bus
-void tud_suspend_cb(bool remote_wakeup_en) { (void)remote_wakeup_en; }
+// // Invoked when usb bus is suspended
+// // remote_wakeup_en : if host allow us  to perform remote wakeup
+// // Within 7ms, device must draw an average of current less than 2.5 mA from bus
+// void tud_suspend_cb(bool remote_wakeup_en) { (void)remote_wakeup_en; }
 
-// Invoked when usb bus is resumed
-void tud_resume_cb(void) {}
+// // Invoked when usb bus is resumed
+// void tud_resume_cb(void) {}
 
 //--------------------------------------------------------------------+
 // USB HID

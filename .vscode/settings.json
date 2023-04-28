@@ -40,5 +40,6 @@
         "sstream": "c",
         "streambuf": "c",
         "task.h": "c"
-    }
+    },
+    "cmake.configureOnOpen": false
 }

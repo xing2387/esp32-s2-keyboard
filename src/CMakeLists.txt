@@ -4,11 +4,11 @@
 
 # FILE(GLOB_RECURSE app_sources ${CMAKE_SOURCE_DIR}/src/*.*)
 # idf_component_register(SRCS ${app_sources})
-idf_component_register(SRCS "main.c" "usb_descriptors.c" "keyboard.c"
+idf_component_register(SRCS "main.c" "usb_descriptors.c" "keyboard.c" "mouse.c"
                     INCLUDE_DIRS "."
                     REQUIRES freertos soc)
 
-include("/home/xing/.platformio/packages/framework-espidf/components/tinyusb/tinyusb/hw/bsp/esp32s2/boards/espressif_saola_1/board.cmake")
+# include("/home/xing/.platformio/packages/framework-espidf@3.40401.0/components/tinyusb/tinyusb/hw/bsp/esp32s2/boards/espressif_saola_1/board.cmake")
 
 idf_component_get_property( FREERTOS_ORIG_INCLUDE_PATH freertos ORIG_INCLUDE_PATH)
 target_include_directories(${COMPONENT_TARGET} PUBLIC
